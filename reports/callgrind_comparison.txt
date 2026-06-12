@@ -1,0 +1,31 @@
+=== callgrind (детерминированный подсчёт инструкций), g++ -O2 -g ===
+Размер контейнера уменьшен до 5000 объектов, чтобы прогон под valgrind занимал секунды;
+соотношение до/после от этого не зависит.
+
+================ ДО рефакторинга (for (const auto obj : vec)) ================
+372,116,703 (100.0%)  PROGRAM TOTALS
+
+Ir                    file:function
+--------------------------------------------------------------------------------
+160,095,000 (43.02%)  ./string/../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S:__memset_avx2_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 75,000,000 (20.15%)  /usr/include/c++/15/bits/basic_string.h:main
+ 55,045,051 (14.79%)  /tmp/perf_small_before.cpp:main [/tmp/perf_small_before]
+ 20,015,000 ( 5.38%)  /tmp/perf_small_before.cpp:std::vector<HeavyObject, std::allocator<HeavyObject> >::~vector()
+ 20,010,000 ( 5.38%)  /usr/include/c++/15/bits/char_traits.h:main
+ 20,000,006 ( 5.37%)  /usr/include/c++/15/bits/basic_string.tcc:main
+ 20,000,000 ( 5.37%)  /usr/include/c++/15/bits/basic_string.h:std::vector<HeavyObject, std::allocator<HeavyObject> >::~vector()
+
+
+================ ПОСЛЕ рефакторинга (for (const auto\& obj : vec)) ================
+237,047,568 (100.0%)  PROGRAM TOTALS
+
+Ir                    file:function
+--------------------------------------------------------------------------------
+160,095,000 (67.54%)  ./string/../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S:__memset_avx2_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 35,025,013 (14.78%)  /tmp/perf_small_after.cpp:main [/tmp/perf_small_after]
+ 35,000,000 (14.76%)  /usr/include/c++/15/bits/basic_string.h:main
+  5,000,000 ( 2.11%)  /usr/include/c++/15/bits/char_traits.h:main
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: /usr/include/c++/15/bits/basic_string.h
+--------------------------------------------------------------------------------

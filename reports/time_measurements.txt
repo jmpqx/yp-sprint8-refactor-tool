@@ -1,0 +1,8 @@
+=== /usr/bin/time, g++ -O2, исходный размер (100000 объектов, ~3.2 ГБ) ===
+Замечание: время зашумлено — доминирует конструирование вектора, одинаковое в обеих версиях.
+до    (копирование): 2.30 s elapsed, 0.39 s user, maxrss 3128320 KB
+после (const auto&): 0.75 s elapsed, 0.24 s user, maxrss 3128064 KB
+до    (копирование): 0.88 s elapsed, 0.35 s user, maxrss 3128192 KB
+после (const auto&): 1.27 s elapsed, 0.24 s user, maxrss 3128064 KB
+до    (копирование): 0.97 s elapsed, 0.40 s user, maxrss 3128320 KB
+после (const auto&): 0.75 s elapsed, 0.21 s user, maxrss 3128064 KB

@@ -1,0 +1,24 @@
+=== leak_example ДО рефакторинга (деструктор Base не виртуальный), g++ -fsanitize=address -g ===
+=================================================================
+==32567==ERROR: AddressSanitizer: new-delete-type-mismatch on 0x6eec68be0010 in thread T0:
+  object passed to delete has wrong type:
+  size of the allocated type:   8 bytes;
+  size of the deallocated type: 1 bytes.
+    #0 0x72cc6a06f3fb in operator delete(void*, unsigned long) ../../../../src/libsanitizer/asan/asan_new_delete.cpp:155
+    #1 0x621dd5d7728c in main /workspaces/yp-sprint8-refactor-tool/reports/leak_example_before.cpp:18
+    #2 0x72cc699a5577 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #3 0x72cc699a563a in __libc_start_main_impl ../csu/libc-start.c:360
+    #4 0x621dd5d77164 in _start (/tmp/leak_before+0x1164) (BuildId: 746458d2720ce2a50439be86ffaa4eb3c018b12b)
+
+0x6eec68be0010 is located 0 bytes inside of 8-byte region [0x6eec68be0010,0x6eec68be0018)
+allocated by thread T0 here:
+    #0 0x72cc6a06e2db in operator new(unsigned long) ../../../../src/libsanitizer/asan/asan_new_delete.cpp:86
+    #1 0x621dd5d77243 in main /workspaces/yp-sprint8-refactor-tool/reports/leak_example_before.cpp:17
+    #2 0x72cc699a5577 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #3 0x72cc699a563a in __libc_start_main_impl ../csu/libc-start.c:360
+    #4 0x621dd5d77164 in _start (/tmp/leak_before+0x1164) (BuildId: 746458d2720ce2a50439be86ffaa4eb3c018b12b)
+
+SUMMARY: AddressSanitizer: new-delete-type-mismatch /workspaces/yp-sprint8-refactor-tool/reports/leak_example_before.cpp:18 in main
+==32567==HINT: if you don't care about these errors you may set ASAN_OPTIONS=new_delete_type_mismatch=0
+==32567==ABORTING
+exit code: 1
