@@ -1,0 +1,2 @@
+=== leak_example ПОСЛЕ рефакторинга инструментом refactor_tool (virtual ~Base), g++ -fsanitize=address -g ===
+exit code: 0

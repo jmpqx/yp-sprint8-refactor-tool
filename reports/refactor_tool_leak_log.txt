@@ -1,0 +1,3 @@
+/workspaces/yp-sprint8-refactor-tool/reports/leak_example_after.cpp:5:5: remark: Деструктор класса 'Base' сделан виртуальным
+    5 |     ~Base() {}  // Невиртуальный
+      |     ^

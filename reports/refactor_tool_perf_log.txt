@@ -1,0 +1,3 @@
+/workspaces/yp-sprint8-refactor-tool/reports/perf_example_after.cpp:10:21: remark: Переменная цикла 'obj' заменена на константную ссылку
+   10 |     for (const auto obj : vec) {  // Копирование без &
+      |                     ^
